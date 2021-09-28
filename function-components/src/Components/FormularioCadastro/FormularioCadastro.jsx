@@ -1,23 +1,16 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { TextField, Button, Switch, FormControlLabel } from '@material-ui/core';
 
 export default function FormularioCadastro() {
   return (
-    <form>
-      <label>Nome</label>
-      <input type="text" />
+    <form >
+      <TextField id="nome" label="Nome" variant="outlined" fullWidth margin="normal" />
+      <TextField id="sobrenome" label="Sobrenome" variant="outlined" fullWidth margin="normal" />
+      <TextField id="cpf" label="CPF" variant="outlined" fullWidth margin="normal" />
 
-      <label>Sobrenome</label>
-      <input type="text" />
+      <FormControlLabel label="Promoções" control={<Switch name="promocoes" defaultChecked color="primary" />} />
+      <FormControlLabel label="Novidades" control={<Switch name="novidades" defaultChecked color="primary" />} />
 
-      <label>CPF</label>
-      <input type="text" />
-
-      <label>Promoções</label>
-      <input type="checkbox" />
-
-      <label>Novidades</label>
-      <input type="checkbox" />
 
       <Button type="submit" variant="contained" color="primary">Cadastrar</Button>
     </form>
