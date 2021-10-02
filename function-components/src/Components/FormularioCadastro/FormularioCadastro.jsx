@@ -1,15 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Switch, FormControlLabel } from '@material-ui/core';
 
 export default function FormularioCadastro() {
-  return (
-    <form >
-      <TextField id="nome" label="Nome" variant="outlined" fullWidth margin="normal" />
-      <TextField id="sobrenome" label="Sobrenome" variant="outlined" fullWidth margin="normal" />
-      <TextField id="cpf" label="CPF" variant="outlined" fullWidth margin="normal" />
+  const [nome, setNome] = useState("");
+  const [sobrenome, setSobrenome] = useState("")
 
-      <FormControlLabel label="Promoções" control={<Switch name="promocoes" defaultChecked color="primary" />} />
-      <FormControlLabel label="Novidades" control={<Switch name="novidades" defaultChecked color="primary" />} />
+  return (
+    <form onSubmit={(event) => {
+      event.preventDefault();
+      console.log(nome, sobrenome)
+    }}>
+      <TextField
+        value={nome}
+        onChange={(event) => {
+          let tmpNome = event.target.value;
+          if (tmpNome.length >= 3) {
+            tmpNome = tmpNome.substring(0, 3)
+          }
+          setNome(tmpNome);
+
+        }}
+        id="nome"
+        label="Nome"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        value={sobrenome}
+        onChange={(event) => {
+          setSobrenome(event.target.value);
+
+        }}
+        id="sobrenome"
+        label="Sobrenome"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        id="cpf"
+        label="CPF"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+      />
+
+      <FormControlLabel
+        label="Promoções"
+        control={<Switch name="promocoes" defaultChecked color="primary" />}
+      />
+
+      <FormControlLabel
+        label="Novidades"
+        control={<Switch name="novidades" defaultChecked color="primary" />}
+      />
 
 
       <Button type="submit" variant="contained" color="primary">Cadastrar</Button>
