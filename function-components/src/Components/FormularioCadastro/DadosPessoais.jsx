@@ -24,6 +24,7 @@ export default function DadosPessoais({ aoEnviar, validarCPF }) {
         variant="outlined"
         fullWidth
         margin="normal"
+        required
       />
       <TextField
         value={sobrenome}
@@ -35,6 +36,7 @@ export default function DadosPessoais({ aoEnviar, validarCPF }) {
         variant="outlined"
         fullWidth
         margin="normal"
+        required
       />
       <TextField
         value={cpf}
@@ -52,6 +54,7 @@ export default function DadosPessoais({ aoEnviar, validarCPF }) {
         variant="outlined"
         fullWidth
         margin="normal"
+        required
       />
 
       <FormControlLabel
