@@ -1,65 +1,59 @@
-import { Button, TextField } from "@material-ui/core";
 import React, { useState, useContext } from "react";
+import { TextField, Button } from "@material-ui/core";
 import ValidacoesCadastro from "../../contexts/ValidacoesCadastro";
+import useErros from "../../hooks/useErros";
 
-export default function DadosUsuario({ aoEnviar }) {
-  const [email, setEmail] = useState()
-  const [senha, setSenha] = useState()
-  const [erros, setErros] = useState({ senha: { valido: true, texto: "" } })
-
+function DadosUsuario({ aoEnviar }) {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const validacoes = useContext(ValidacoesCadastro)
-
-  function validarCampos(event) {
-    const { name, value } = event.target
-    const novoEstado = { ...erros }
-    novoEstado[name] = validacoes[name](value)
-    setErros(novoEstado)
-  }
-
-  function possoEnviar() {
-    for (let campo in erros) {
-      if (!erros[campo].valido) {
-        return false
-      }
-    }
-    return true
-  }
+  const [erros, validarCampos, possoEnviar] = useErros(validacoes);
 
   return (
     <form
       onSubmit={(event) => {
-        event.preventDefault()
+        event.preventDefault();
         if (possoEnviar()) {
-          aoEnviar({ email, senha })
+          aoEnviar({ email, senha });
         }
       }}
     >
       <TextField
         value={email}
-        onChange={(event) => { setEmail(event.target.value) }}
-        id='email'
-        label='email'
+        onChange={(event) => {
+          setEmail(event.target.value);
+        }}
+        id="email"
         name="email"
-        type='email'
+        label="email"
+        type="email"
         required
         variant="outlined"
+        margin="normal"
         fullWidth
-        margin="normal" />
+      />
       <TextField
         value={senha}
-        onChange={(event) => { setSenha(event.target.value) }}
+        onChange={(event) => {
+          setSenha(event.target.value);
+        }}
         onBlur={validarCampos}
         error={!erros.senha.valido}
         helperText={erros.senha.texto}
-        id='senha'
-        label='senha'
+        id="senha"
         name="senha"
-        type='password'
+        label="senha"
+        type="password"
         required
         variant="outlined"
+        margin="normal"
         fullWidth
-        margin="normal" />
-      <Button type="submit" variant="contained" color="primary">Cadastrar</Button>
+      />
+      <Button type="submit" variant="contained" color="primary">
+        Próximo
+      </Button>
     </form>
-  )
+  );
 }
+
+export default DadosUsuario;
